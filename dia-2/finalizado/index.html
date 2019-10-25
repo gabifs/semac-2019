@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <h2>Mensagens: </h2>
+    <hr>
+    <!-- Lista onde as mensagens são inseridas -->
+    <ul id="messages">
+
+    </ul>
+    <hr>
+    <!-- Formulário composto de input e botão enviar -->
+    <form action="">
+
+      <!-- Área de input -->
+      <input id="m" autocomplete="off" />
+
+      <!-- Botão de envio -->
+      <button>Enviar</button>
+    </form>
+
+<!-- módulo do socket -->
+<script src="/socket.io/socket.io.js"></script>
+
+<!-- módulo do jquery -->
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<!-- script da aplicação -->
+<script>
+  $(function () {
+    var socket = io();
+
+    //monitor do evento submit do formulário, responsável por enviar a mensagem para o servidor
+    $('form').submit(function(e){
+
+      e.preventDefault(); // impede o comportamento padrão do submit de recarregar a página.
+
+      socket.emit('chat message', $('#m').val()); //emissor de evento, "chat message", junto com a mensagem escrita
+      $('#m').val(''); //apaga a mensagem do campo de input
+      return false;
+    });
+
+    //monitor do evento "chat message", responsável por escrever a mensagem recebida do servidor
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg)); //insere um novo item na lista, contendo a menságem do servidor
+    });
+  });
+</script>
+  </body>
+</html>
