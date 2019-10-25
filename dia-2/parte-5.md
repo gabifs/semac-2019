@@ -16,6 +16,7 @@ io.on('connection', function(socket){
   ele deve emitir um evento "chat messagem" com a mensagem para todos os conectados; 
 */
 ```
+---
 
 ```html
 <script>
