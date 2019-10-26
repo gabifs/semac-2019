@@ -19,7 +19,6 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('usuario connectado');
   //mensagem será impressa no console sempre que um usuário se conectar
-  });
 });
 
 //----------------------------------------------
